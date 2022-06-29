@@ -1,5 +1,6 @@
 # Mock-android
-- 스켈레톤 mock 앱 작업 모음
+- 스켈레톤 작업
+- Hilt, Navigation-graph, MVVM, Clean architecture
 - Extensions, Widgets, Uitilities 샘플 코드 작성
 
 ## Progress

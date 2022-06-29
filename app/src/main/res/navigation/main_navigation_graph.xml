@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation_graph"
+    app:startDestination="@id/menuFragment">
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="kim.uno.mock.ui.main.MenuFragment"
+        android:label="menuFragment"
+        tools:layout="@layout/recycler_view_fragment">
+        <action
+            android:id="@+id/action_menuFragment_to_recyclerViewFragment"
+            app:destination="@id/recyclerViewFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_recyclerViewBuilderFragment"
+            app:destination="@id/recyclerViewBuilderFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_recyclerViewDraggableFragment"
+            app:destination="@id/recyclerViewDraggableFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_recyclerViewInfiniteLoopFragment"
+            app:destination="@id/recyclerViewInfiniteLoopFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_pagingFragment"
+            app:destination="@id/pagingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recyclerViewFragment"
+        android:name="kim.uno.mock.ui.recyclerview.fragment.RecyclerViewFragment"
+        android:label="recyclerViewFragment"
+        tools:layout="@layout/recycler_view_fragment" />
+
+    <fragment
+        android:id="@+id/recyclerViewBuilderFragment"
+        android:name="kim.uno.mock.ui.recyclerview.fragment.RecyclerViewBuilderFragment"
+        android:label="recyclerViewBuilderFragment"
+        tools:layout="@layout/recycler_view_fragment" />
+
+    <fragment
+        android:id="@+id/recyclerViewDraggableFragment"
+        android:name="kim.uno.mock.ui.recyclerview.fragment.RecyclerViewDraggableFragment"
+        android:label="recyclerViewDraggableFragment"
+        tools:layout="@layout/recycler_view_fragment" />
+
+    <fragment
+        android:id="@+id/recyclerViewInfiniteLoopFragment"
+        android:name="kim.uno.mock.ui.recyclerview.fragment.RecyclerViewInfiniteLoopFragment"
+        android:label="recyclerViewInfiniteLoopFragment"
+        tools:layout="@layout/recycler_view_fragment" />
+
+    <fragment
+        android:id="@+id/pagingFragment"
+        android:name="kim.uno.mock.ui.paging.PagingFragment"
+        android:label="pagingFragment"
+        tools:layout="@layout/recycler_view_fragment" />
+
+</navigation>

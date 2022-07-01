@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_menuFragment_to_pagingFragment"
             app:destination="@id/pagingFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_retrofitFragment"
+            app:destination="@id/retrofitFragment" />
     </fragment>
 
     <fragment
@@ -55,6 +58,12 @@
         android:id="@+id/pagingFragment"
         android:name="kim.uno.mock.ui.paging.PagingFragment"
         android:label="pagingFragment"
+        tools:layout="@layout/recycler_view_fragment" />
+
+    <fragment
+        android:id="@+id/retrofitFragment"
+        android:name="kim.uno.mock.ui.retrofit.RetrofitFragment"
+        android:label="retrofitFragment"
         tools:layout="@layout/recycler_view_fragment" />
 
 </navigation>

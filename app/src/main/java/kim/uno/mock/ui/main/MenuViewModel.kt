@@ -37,6 +37,10 @@ class MenuViewModel @Inject constructor() : BaseViewModel() {
                 Menu(
                     name = "Paging (Pagination)",
                     directions = MenuFragmentDirections.actionMenuFragmentToPagingFragment()
+                ),
+                Menu(
+                    name = "Retrofit with pagination",
+                    directions = MenuFragmentDirections.actionMenuFragmentToRetrofitFragment()
                 )
             )
         }

@@ -6,7 +6,9 @@ import kim.uno.mock.data.local.room.mock.MockEntity
 import kim.uno.mock.extension.clear
 import kim.uno.mock.extension.pref
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class LocalData @Inject constructor() {
 
     private val pref by lazy { MockApp.context.pref }

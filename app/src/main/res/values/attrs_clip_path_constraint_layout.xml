@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ClipPathConstraintLayout">
+        <attr name="android:radius" />
+        <attr name="android:topLeftRadius" />
+        <attr name="android:topRightRadius" />
+        <attr name="android:bottomLeftRadius" />
+        <attr name="android:bottomRightRadius" />
+        <attr name="topLeftCutout" format="dimension" />
+        <attr name="topRightCutout" format="dimension" />
+        <attr name="bottomLeftCutout" format="dimension" />
+        <attr name="bottomRightCutout" format="dimension" />
+        <attr name="cutoutLeftInset" format="dimension" />
+        <attr name="cutoutTopInset" format="dimension" />
+        <attr name="cutoutRightInset" format="dimension" />
+        <attr name="cutoutBottomInset" format="dimension" />
+        <attr name="android:shadowColor" />
+        <attr name="android:shadowDx" />
+        <attr name="android:shadowDy" />
+        <attr name="android:shadowRadius" />
+        <attr name="leftShadowCutout" format="boolean" />
+        <attr name="topShadowCutout" format="boolean" />
+        <attr name="rightShadowCutout" format="boolean" />
+        <attr name="bottomShadowCutout" format="boolean" />
+        <attr name="android:strokeWidth" />
+        <attr name="android:strokeColor" />
+    </declare-styleable>
+
+</resources>

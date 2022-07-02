@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import kim.uno.mock.data.local.room.mock.MockEntity
 import kim.uno.mock.databinding.RecyclerViewFragmentBinding
+import kim.uno.mock.extension.DefaultRecyclerViewAnimator
+import kim.uno.mock.extension.addInitializationAnimator
 import kim.uno.mock.extension.autoCleared
 import kim.uno.mock.extension.observe
 import kim.uno.mock.ui.BaseFragment
@@ -22,6 +24,7 @@ abstract class AbstractRecyclerViewFragment : BaseFragment() {
         observeActivityViewModel(viewModel)
         observe(viewModel.mockList, this::mockList)
         binding.recyclerView.adapter = adapter
+        binding.recyclerView.addInitializationAnimator(DefaultRecyclerViewAnimator())
         viewModel.refresh()
         return binding.root
     }

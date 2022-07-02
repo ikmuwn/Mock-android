@@ -6,6 +6,8 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kim.uno.mock.data.remote.github.dto.GithubRepository
 import kim.uno.mock.databinding.RecyclerViewFragmentBinding
+import kim.uno.mock.extension.DefaultRecyclerViewAnimator
+import kim.uno.mock.extension.addInitializationAnimator
 import kim.uno.mock.extension.autoCleared
 import kim.uno.mock.extension.observe
 import kim.uno.mock.ui.BaseFragment
@@ -32,6 +34,7 @@ class RetrofitFragment : BaseFragment() {
         observe(viewModel.repositories, this::repositories)
         binding.recyclerView.adapter = adapter
         viewModel.refresh()
+        adapter.recyclerView.addInitializationAnimator(DefaultRecyclerViewAnimator())
         return binding.root
     }
 

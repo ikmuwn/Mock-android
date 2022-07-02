@@ -7,6 +7,7 @@ import android.text.Selection
 import android.text.Spannable
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.text.style.URLSpan
 import android.text.util.Linkify
 import android.view.MotionEvent
 import android.view.View
@@ -14,6 +15,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.BindingAdapter
 
 fun EditText.showKeyboard() {
@@ -113,21 +115,21 @@ fun TextView.enableAutoLink(enable: Boolean? = true, callback: (() -> Unit?)?) {
             }
         }
 
-//        addTextChangedListener {
-//            val charSequence = this.text
-//            if (charSequence is Spannable) {
-//                val spans = charSequence.getSpans(0, charSequence.length, URLSpan::class.java)
-//                spans.filter { it.url.startsWith("tel:") && !it.toString().isTel() }
-//                    .forEach { span ->
-//                        val start = charSequence.getSpanStart(span)
-//                        val end = charSequence.getSpanEnd(span)
-//                        val spanText = charSequence.substring(start, end)
-//                        if (!spanText.isTel()) {
-//                            charSequence.removeSpan(span)
-//                        }
-//                    }
-//            }
-//        }
+        addTextChangedListener {
+            val charSequence = this.text
+            if (charSequence is Spannable) {
+                val spans = charSequence.getSpans(0, charSequence.length, URLSpan::class.java)
+                spans.filter { it.url.startsWith("tel:") && !it.toString().isTel() }
+                    .forEach { span ->
+                        val start = charSequence.getSpanStart(span)
+                        val end = charSequence.getSpanEnd(span)
+                        val spanText = charSequence.substring(start, end)
+                        if (!spanText.isTel()) {
+                            charSequence.removeSpan(span)
+                        }
+                    }
+            }
+        }
     }
 }
 

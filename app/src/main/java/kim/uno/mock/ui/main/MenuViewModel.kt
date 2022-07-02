@@ -41,6 +41,10 @@ class MenuViewModel @Inject constructor() : BaseViewModel() {
                 Menu(
                     name = "Retrofit with pagination",
                     directions = MenuFragmentDirections.actionMenuFragmentToRetrofitFragment()
+                ),
+                Menu(
+                    name = "Keyboard animator",
+                    directions = MenuFragmentDirections.actionMenuFragmentToKeyboardAnimatorFragment()
                 )
             )
         }

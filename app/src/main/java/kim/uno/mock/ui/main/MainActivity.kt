@@ -2,15 +2,13 @@ package kim.uno.mock.ui.main
 
 import android.animation.ValueAnimator
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
 import kim.uno.mock.databinding.MainActivityBinding
-import kim.uno.mock.extension.applyKeyboardInsetsAnimator
-import kim.uno.mock.extension.bottomPadding
-import kim.uno.mock.extension.navigationBarHeight
+import kim.uno.mock.extension.*
 import kim.uno.mock.ui.BaseViewModel
 
 @AndroidEntryPoint
@@ -24,7 +22,8 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        invalidateNavigationBarHeight()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        invalidateSystemWindows()
         binding.root.applyKeyboardInsetsAnimator()
 
         try {
@@ -37,15 +36,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun invalidateNavigationBarHeight() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            binding.root.bottomPadding = navigationBarHeight.toInt()
-        }
+    private fun invalidateSystemWindows() {
+        binding.root.topPadding = statusBarHeight
+        binding.root.bottomPadding = navigationBarHeight.toInt()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        invalidateNavigationBarHeight()
+        invalidateSystemWindows()
     }
 
 }

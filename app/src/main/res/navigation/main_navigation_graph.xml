@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_menuFragment_to_retrofitFragment"
             app:destination="@id/retrofitFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_keyboardAnimatorFragment"
+            app:destination="@id/keyboardAnimatorFragment" />
     </fragment>
 
     <fragment
@@ -65,5 +68,11 @@
         android:name="kim.uno.mock.ui.retrofit.RetrofitFragment"
         android:label="retrofitFragment"
         tools:layout="@layout/recycler_view_fragment" />
+
+    <fragment
+        android:id="@+id/keyboardAnimatorFragment"
+        android:name="kim.uno.mock.ui.keyboard.KeyboardAnimatorFragment"
+        android:label="keyboardAnimatorFragment"
+        tools:layout="@layout/keyboard_animator_fragment" />
 
 </navigation>

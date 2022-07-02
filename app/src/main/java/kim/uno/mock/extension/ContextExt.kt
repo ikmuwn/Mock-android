@@ -6,18 +6,46 @@ import android.content.ContextWrapper
 import android.graphics.Point
 import android.graphics.Rect
 import android.os.Build
+import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import kotlin.math.max
 
 val Context.screenWidth: Int
-    get() = applicationContext.resources.displayMetrics.widthPixels
+    get() = currentWindowPoint?.x ?: applicationContext.resources.displayMetrics.widthPixels
 
 val Context.screenHeight: Int
-    get() = applicationContext.resources.displayMetrics.heightPixels
+    get() = currentWindowPoint?.y ?: applicationContext.resources.displayMetrics.heightPixels
 
-val Context.realDisplayPoint: Point?
+val Context.currentWindowPoint: Point?
+    get() = try {
+        val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val metrics = windowManager.currentWindowMetrics
+            val bounds = metrics.bounds
+            val windowInsets = metrics.windowInsets
+
+            val insets = windowInsets.getInsetsIgnoringVisibility(
+                WindowInsets.Type.navigationBars()
+                        or WindowInsets.Type.statusBars()
+            )
+
+            val insetsWidth = insets.right + insets.left
+            val insetsHeight = insets.top + insets.bottom
+
+            Point(
+                bounds.width() - insetsWidth,
+                bounds.height() - insetsHeight
+            )
+        } else {
+            Point().apply { windowManager.defaultDisplay.getSize(this) }
+        }
+    } catch (e: Exception) {
+        null
+    }
+
+val Context.maximumWindowPoint: Point?
     get() = try {
         val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -30,11 +58,11 @@ val Context.realDisplayPoint: Point?
         null
     }
 
-val Context.realDisplayWidth: Int
-    get() = realDisplayPoint?.x ?: screenWidth
+val Context.maximumWindowWidth: Int
+    get() = maximumWindowPoint?.x ?: screenWidth
 
-val Context.realDisplayHeight: Int
-    get() = realDisplayPoint?.y ?: screenHeight
+val Context.maximumWindowHeight: Int
+    get() = maximumWindowPoint?.y ?: screenHeight
 
 val Context.statusBarHeight: Int
     get() = if (!isPopUpView) {
@@ -66,7 +94,7 @@ val Context.navigationBarHeight: Float
 
 private val Context.navigationBarHeightDimension: Float
     get() = try {
-        if (realDisplayHeight > statusBarHeightDimension + screenHeight) {
+        if (maximumWindowHeight > statusBarHeightDimension + screenHeight) {
             val resId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
             resources.getDimension(resId)
         } else {
@@ -81,7 +109,7 @@ private val Context.navigationBarHeightDimension: Float
  * navigation bar height float <> int 유실 보정하여 계산
  */
 val Context.isPopUpView: Boolean
-    get() = realDisplayHeight > statusBarHeightDimension + screenHeight + navigationBarHeightDimension + 10
+    get() = maximumWindowHeight > statusBarHeightDimension + screenHeight + navigationBarHeightDimension + 10
 
 val Context.isAlive: Boolean
     get() = this !is Activity || !(isFinishing || isDestroyed)

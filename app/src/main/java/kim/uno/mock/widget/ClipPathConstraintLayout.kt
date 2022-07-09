@@ -48,6 +48,29 @@ open class ClipPathConstraintLayout : ConstraintLayout {
     var onResumeCallback: (() -> Unit)? = null
     var onPauseCallback: (() -> Unit)? = null
 
+    private val clipPath: Path
+        get() {
+            val radiusTopLeft = max(0f, radiusTopLeft - strokeWidth).toInt()
+            val radiusTopRight = max(0f, radiusTopRight - strokeWidth).toInt()
+            val radiusBottomLeft = max(0f, radiusBottomLeft - strokeWidth).toInt()
+            val radiusBottomRight = max(0f, radiusBottomRight - strokeWidth).toInt()
+            return getClipPath(
+                radiusTopLeft = radiusTopLeft,
+                radiusTopRight = radiusTopRight,
+                radiusBottomLeft = radiusBottomLeft,
+                radiusBottomRight = radiusBottomRight,
+                cutoutTopLeft = cutoutTopLeft,
+                cutoutTopRight = cutoutTopRight,
+                cutoutBottomLeft = cutoutBottomLeft,
+                cutoutBottomRight = cutoutBottomRight,
+                cutoutLeftInset = cutoutLeftInset,
+                cutoutTopInset = cutoutTopInset,
+                cutoutRightInset = cutoutRightInset,
+                cutoutBottomInset = cutoutBottomInset,
+                inset = strokeWidth
+            )
+        }
+
     constructor(context: Context) : super(context) {
         applyAttributeSet(null)
     }
@@ -62,6 +85,10 @@ open class ClipPathConstraintLayout : ConstraintLayout {
         defStyleAttr
     ) {
         applyAttributeSet(attrs)
+    }
+
+    init {
+        setWillNotDraw(false)
     }
 
     private fun applyAttributeSet(attrs: AttributeSet?) {
@@ -182,28 +209,7 @@ open class ClipPathConstraintLayout : ConstraintLayout {
         drawStroke(canvas)
 
         if (clipRadius || clipCutout) {
-            val radiusTopLeft = max(0f, radiusTopLeft - strokeWidth).toInt()
-            val radiusTopRight = max(0f, radiusTopRight - strokeWidth).toInt()
-            val radiusBottomLeft = max(0f, radiusBottomLeft - strokeWidth).toInt()
-            val radiusBottomRight = max(0f, radiusBottomRight - strokeWidth).toInt()
-
-            canvas?.clipPath(
-                getClipPath(
-                    radiusTopLeft = radiusTopLeft,
-                    radiusTopRight = radiusTopRight,
-                    radiusBottomLeft = radiusBottomLeft,
-                    radiusBottomRight = radiusBottomRight,
-                    cutoutTopLeft = cutoutTopLeft,
-                    cutoutTopRight = cutoutTopRight,
-                    cutoutBottomLeft = cutoutBottomLeft,
-                    cutoutBottomRight = cutoutBottomRight,
-                    cutoutLeftInset = cutoutLeftInset,
-                    cutoutTopInset = cutoutTopInset,
-                    cutoutRightInset = cutoutRightInset,
-                    cutoutBottomInset = cutoutBottomInset,
-                    inset = strokeWidth
-                )
-            )
+            canvas?.clipPath(clipPath)
         }
         super.draw(canvas)
     }
@@ -286,6 +292,16 @@ open class ClipPathConstraintLayout : ConstraintLayout {
                     cutoutPaint
                 )
             }
+
+            val clipPathBitmap = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888)
+            Canvas(clipPathBitmap).apply {
+                drawPath(clipPath, Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                    style = Paint.Style.FILL
+                })
+            }
+            drawBitmap(clipPathBitmap, offset, offset, Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
+            })
         }
 
         shadow?.let {

@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_menuFragment_to_keyboardAnimatorFragment"
             app:destination="@id/keyboardAnimatorFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_recyclerViewSwipeableFragment"
+            app:destination="@id/recyclerViewSwipeableFragment" />
     </fragment>
 
     <fragment
@@ -49,6 +52,12 @@
         android:id="@+id/recyclerViewDraggableFragment"
         android:name="kim.uno.mock.ui.recyclerview.fragment.RecyclerViewDraggableFragment"
         android:label="recyclerViewDraggableFragment"
+        tools:layout="@layout/recycler_view_fragment" />
+
+    <fragment
+        android:id="@+id/recyclerViewSwipeableFragment"
+        android:name="kim.uno.mock.ui.recyclerview.fragment.RecyclerViewSwipeableFragment"
+        android:label="recyclerViewSwipeableFragment"
         tools:layout="@layout/recycler_view_fragment" />
 
     <fragment

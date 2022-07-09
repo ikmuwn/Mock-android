@@ -31,6 +31,10 @@ class MenuViewModel @Inject constructor() : BaseViewModel() {
                     directions = MenuFragmentDirections.actionMenuFragmentToRecyclerViewDraggableFragment()
                 ),
                 Menu(
+                    name = "RecyclerView Swipeable",
+                    directions = MenuFragmentDirections.actionMenuFragmentToRecyclerViewSwipeableFragment()
+                ),
+                Menu(
                     name = "RecyclerView Infinite loop",
                     directions = MenuFragmentDirections.actionMenuFragmentToRecyclerViewInfiniteLoopFragment()
                 ),

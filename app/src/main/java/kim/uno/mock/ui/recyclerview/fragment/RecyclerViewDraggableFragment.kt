@@ -8,7 +8,7 @@ import kim.uno.mock.util.recyclerview.DraggableRecyclerAdapter
 class RecyclerViewDraggableFragment : RecyclerViewFragment() {
 
     override val adapter by lazy {
-        DraggableRecyclerAdapter.Builder()
+        DraggableRecyclerAdapter.Builder(longPressDragEnabled = true)
             .addHolder(holder = DraggableMockHolder::class)
             .build()
     }

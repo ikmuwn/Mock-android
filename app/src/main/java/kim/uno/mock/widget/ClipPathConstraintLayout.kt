@@ -87,10 +87,6 @@ open class ClipPathConstraintLayout : ConstraintLayout {
         applyAttributeSet(attrs)
     }
 
-    init {
-        setWillNotDraw(false)
-    }
-
     private fun applyAttributeSet(attrs: AttributeSet?) {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.ClipPathConstraintLayout)
         val radius =
@@ -192,6 +188,8 @@ open class ClipPathConstraintLayout : ConstraintLayout {
 
         clipRadius = radiusTopLeft + radiusTopRight + radiusBottomLeft + radiusBottomRight > 0
         clipCutout = cutoutTopLeft + cutoutTopRight + cutoutBottomLeft + cutoutBottomRight > 0
+
+        setWillNotDraw(false)
     }
 
     fun setRadius(radius: Int) {
@@ -202,14 +200,16 @@ open class ClipPathConstraintLayout : ConstraintLayout {
     }
 
     override fun draw(canvas: Canvas?) {
-        if (shadowRadius > 0) {
-            drawShadow(canvas)
-        }
+        if (measuredWidth > 0 && measuredHeight > 0) {
+            if (shadowRadius > 0) {
+                drawShadow(canvas)
+            }
 
-        drawStroke(canvas)
+            drawStroke(canvas)
 
-        if (clipRadius || clipCutout) {
-            canvas?.clipPath(clipPath)
+            if (clipRadius || clipCutout) {
+                canvas?.clipPath(clipPath)
+            }
         }
         super.draw(canvas)
     }

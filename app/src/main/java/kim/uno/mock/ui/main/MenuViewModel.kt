@@ -49,6 +49,10 @@ class MenuViewModel @Inject constructor() : BaseViewModel() {
                 Menu(
                     name = "Keyboard animator",
                     directions = MenuFragmentDirections.actionMenuFragmentToKeyboardAnimatorFragment()
+                ),
+                Menu(
+                    name = "Page indicator",
+                    directions = MenuFragmentDirections.actionMenuFragmentToIndicatorFragment()
                 )
             )
         }

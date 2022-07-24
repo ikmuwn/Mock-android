@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_menuFragment_to_recyclerViewSwipeableFragment"
             app:destination="@id/recyclerViewSwipeableFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_indicatorFragment"
+            app:destination="@id/indicatorFragment" />
     </fragment>
 
     <fragment
@@ -83,5 +86,11 @@
         android:name="kim.uno.mock.ui.keyboard.KeyboardAnimatorFragment"
         android:label="keyboardAnimatorFragment"
         tools:layout="@layout/keyboard_animator_fragment" />
+
+    <fragment
+        android:id="@+id/indicatorFragment"
+        android:name="kim.uno.mock.ui.indicator.IndicatorFragment"
+        android:label="indicatorFragment"
+        tools:layout="@layout/indicator_fragment" />
 
 </navigation>

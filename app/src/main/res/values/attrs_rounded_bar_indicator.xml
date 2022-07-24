@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RoundedBarIndicator">
+        <attr name="indicatorCircleColor" format="color" />
+        <attr name="indicatorBarColor" format="color" />
+        <attr name="indicatorSize" format="dimension" />
+        <attr name="indicatorSpreadSize" format="dimension" />
+        <attr name="indicatorGap" format="dimension" />
+    </declare-styleable>
+
+</resources>
